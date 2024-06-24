@@ -14,62 +14,65 @@
             height: 100vh;
             margin: 0;
         }
-        .card {
-            background: white;
+        .envelope {
             width: 300px;
             height: 200px;
-            perspective: 1000px;
-        }
-        .card-inner {
             position: relative;
-            width: 100%;
-            height: 100%;
+            cursor: pointer;
             transform-style: preserve-3d;
-            transition: transform 0.6s;
+            transition: transform 1s;
         }
-        .card:hover .card-inner {
-            transform: rotateY(180deg);
+        .envelope:hover {
+            transform: rotateX(-10deg) rotateY(-10deg);
         }
-        .card-front, .card-back {
+        .front, .back {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
+            border: 2px solid #ccc;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .card-front {
-            background: #4CAF50;
+        .front {
+            background-color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
-            font-size: 1.2em;
+            font-size: 1.5em;
         }
-        .card-back {
-            background: white;
+        .back {
+            background-color: #f1f1f1;
             transform: rotateY(180deg);
             display: flex;
             justify-content: center;
             align-items: center;
-            color: black;
+            font-size: 1em;
+            text-align: center;
             padding: 20px;
             box-sizing: border-box;
-            text-align: center;
-            font-size: 1em;
+        }
+        .envelope.open .front {
+            transform: rotateY(-180deg);
+        }
+        .envelope.open .back {
+            transform: rotateY(0deg);
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="card-inner">
-            <div class="card-front">
-                <p>¡Hola!</p>
-            </div>
-            <div class="card-back">
-                <p>Solo paso a recordarte que me enorgulleces por tu dedicación diaria mi inge novio 😎. Te Amo mucho mi vida ❤️</p>
-            </div>
+    <div class="envelope" id="envelope">
+        <div class="front">
+            <p>¡Hola!</p>
+        </div>
+        <div class="back">
+            <p>Solo paso a recordarte que me enorgulleces por tu dedicación diaria mi inge novio 😎. Te Amo mucho mi vida ❤️</p>
         </div>
     </div>
+
+    <script>
+        document.getElementById('envelope').addEventListener('click', function() {
+            this.classList.toggle('open');
+        });
+    </script>
 </body>
 </html>
