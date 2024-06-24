@@ -14,18 +14,21 @@
       background-color: #f0f0f0;
       margin: 0;
     }
-    .envelope {
+    .envelope-container {
+      position: relative;
       width: 300px;
       height: 200px;
-      position: relative;
-      transform-style: preserve-3d;
-      transform: rotateX(0deg);
-      transition: transform 1s;
+      perspective: 1000px;
       cursor: pointer;
     }
-    .envelope .front,
-    .envelope .back,
-    .envelope .flap {
+    .envelope {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s;
+    }
+    .flap, .front, .back {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -33,7 +36,15 @@
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     }
-    .envelope .front {
+    .flap {
+      background-color: #007BFF;
+      height: 100px;
+      top: -100px;
+      transform-origin: bottom;
+      transform: rotateX(90deg);
+      transition: transform 1s;
+    }
+    .front {
       background-color: #007BFF;
       color: white;
       display: flex;
@@ -43,24 +54,39 @@
       text-align: center;
       padding: 10px;
     }
-    .envelope .back {
+    .back {
       background-color: #fff;
       transform: rotateY(180deg);
       padding: 20px;
       box-sizing: border-box;
-    }
-    .envelope .flap {
-      background-color: #007BFF;
-      height: 100px;
-      top: -100px;
-      transform-origin: bottom;
-      transform: rotateX(90deg);
+      text-align: center;
     }
     .envelope.open .flap {
       transform: rotateX(0deg);
     }
     .envelope.open .front {
       transform: rotateY(-180deg);
+    }
+    .note {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 260px;
+      height: 140px;
+      margin-left: -130px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      box-sizing: border-box;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s, transform 1s;
+    }
+    .envelope.open .note {
+      opacity: 1;
+      transform: translateY(-150px);
     }
     .message {
       font-size: 18px;
@@ -77,12 +103,15 @@
   </style>
 </head>
 <body>
-  <div class="envelope" onclick="toggleEnvelope()">
-    <div class="flap"></div>
-    <div class="front">
-      Mensaje Importante
+  <div class="envelope-container" onclick="toggleEnvelope()">
+    <div class="envelope">
+      <div class="flap"></div>
+      <div class="front">
+        Mensaje Importante
+      </div>
+      <div class="back"></div>
     </div>
-    <div class="back">
+    <div class="note">
       <div class="message">
         <p>Solo paso a recordarte que me enorgulleces por tu dedicación diaria mi inge novio <span class="emoji">😎</span>.</p>
         <p>Te Amo mucho mi vida <span class="emoji">❤️</span></p>
