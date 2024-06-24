@@ -1,130 +1,77 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mensaje Importante</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f0f0f0;
-      margin: 0;
-    }
-    .envelope-container {
-      position: relative;
-      width: 300px;
-      height: 200px;
-      perspective: 1000px;
-      cursor: pointer;
-    }
-    .envelope {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 1s;
-    }
-    .flap, .front, .back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    }
-    .flap {
-      background-color: #007BFF;
-      height: 100px;
-      top: -100px;
-      transform-origin: bottom;
-      transform: rotateX(90deg);
-      transition: transform 1s;
-    }
-    .front {
-      background-color: #007BFF;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      text-align: center;
-      padding: 10px;
-    }
-    .back {
-      background-color: #fff;
-      transform: rotateY(180deg);
-      padding: 20px;
-      box-sizing: border-box;
-      text-align: center;
-    }
-    .envelope.open .flap {
-      transform: rotateX(0deg);
-    }
-    .envelope.open .front {
-      transform: rotateY(-180deg);
-    }
-    .note {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 260px;
-      height: 140px;
-      margin-left: -130px;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      box-sizing: border-box;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 1s, transform 1s;
-    }
-    .envelope.open .note {
-      opacity: 1;
-      transform: translateY(-150px);
-    }
-    .message {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-    .signature {
-      font-weight: bold;
-      font-style: italic;
-    }
-    .emoji {
-      font-size: 24px;
-      vertical-align: middle;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Animada</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: #e0e0e0;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .flap {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            background: #d1d1d1;
+            top: 0;
+            transform-origin: top;
+            animation: openFlap 2s forwards;
+        }
+
+        .note {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            top: 100%;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            padding: 20px;
+            box-sizing: border-box;
+            border-top: 2px solid #ccc;
+            animation: revealNote 2s 2s forwards;
+        }
+
+        @keyframes openFlap {
+            0% { transform: rotateX(0); }
+            100% { transform: rotateX(180deg); }
+        }
+
+        @keyframes revealNote {
+            0% { top: 100%; }
+            100% { top: 0; }
+        }
+    </style>
 </head>
 <body>
-  <div class="envelope-container" onclick="toggleEnvelope()">
     <div class="envelope">
-      <div class="flap"></div>
-      <div class="front">
-        Mensaje Importante
-      </div>
-      <div class="back"></div>
+        <div class="flap"></div>
+        <div class="note">
+            Solo paso a recordarte que me enorgulleces por tu dedicación diaria mi inge novio 😎. Te Amo mucho mi vida ❤️
+        </div>
     </div>
-    <div class="note">
-      <div class="message">
-        <p>Solo paso a recordarte que me enorgulleces por tu dedicación diaria mi inge novio <span class="emoji">😎</span>.</p>
-        <p>Te Amo mucho mi vida <span class="emoji">❤️</span></p>
-      </div>
-      <div class="signature">
-        <p>Tu amorcito</p>
-      </div>
-    </div>
-  </div>
-  <script>
-    function toggleEnvelope() {
-      document.querySelector('.envelope').classList.toggle('open');
-    }
-  </script>
 </body>
 </html>
+
